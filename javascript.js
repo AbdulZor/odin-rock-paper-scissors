@@ -19,3 +19,23 @@ function getComputerChoice() {
 
     return "scissors";
 }
+
+function getHumanChoice() {
+    // take user input and return it.
+
+    // 1. Plan:
+    // get input from the user
+    // check if the user input is a valid choice
+    // IF user input is from the following: rock, paper, scissors.
+    //  THEN return the valid user input
+
+    let userInput = prompt("What is your choice? Pick one of the following: rock, paper or scissors.");
+    userInput = userInput.trim().toLowerCase();
+    if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
+        return userInput;
+    }
+
+    return;
+}
+
+console.log(getHumanChoice());
