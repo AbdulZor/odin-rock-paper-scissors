@@ -38,4 +38,43 @@ function getHumanChoice() {
     return;
 }
 
-console.log(getHumanChoice());
+let humanScore = 0;
+let computerScore = 0;
+
+function playRound() {
+    // Get user and computer choice
+    // If user choice trumps computer choice, increment score of the winner and log winner announcement
+
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    console.log(humanChoice);
+    console.log(computerChoice);
+
+    let humanChoiceResult = getHumanChoiceResult(humanChoice, computerChoice);
+    if (humanChoiceResult === 1) {
+        humanScore++;
+        console.log("Humans wins!!");
+    } else if (humanChoiceResult === -1) {
+        computerScore++;
+        console.log("Computer wins!!");
+    } else {
+        console.log("It is a tie!");
+    }
+
+    return;
+}
+
+function getHumanChoiceResult(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return 0;
+    } else if (humanChoice === "rock" && computerChoice === "scissors" ||
+        humanChoice === "paper" && computerChoice === "rock" ||
+        humanChoice === "scissors" && computerChoice === "paper"
+    ) {
+        return 1;
+    }
+
+    return -1;
+}
+
+playRound();
