@@ -45,12 +45,10 @@ function playRound() {
     // Get user and computer choice
     // If user choice trumps computer choice, increment score of the winner and log winner announcement
 
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    console.log(humanChoice);
-    console.log(computerChoice);
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
 
-    let humanChoiceResult = getHumanChoiceResult(humanChoice, computerChoice);
+    const humanChoiceResult = getHumanChoiceResult(humanChoice, computerChoice);
     if (humanChoiceResult === 1) {
         humanScore++;
         console.log("Humans wins!!");
@@ -77,4 +75,17 @@ function getHumanChoiceResult(humanChoice, computerChoice) {
     return -1;
 }
 
-playRound();
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        if (humanScore === 3 || computerScore === 3) {
+            break;
+        }
+        playRound();
+    }
+
+    if (humanScore === 3) {
+        console.log("Human has won the game!");
+    } else {
+        console.log("Computer wins the game!");
+    }
+}
