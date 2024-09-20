@@ -20,24 +20,6 @@ function getComputerChoice() {
     return "scissors";
 }
 
-function getHumanChoice() {
-    // take user input and return it.
-
-    // 1. Plan:
-    // get input from the user
-    // check if the user input is a valid choice
-    // IF user input is from the following: rock, paper, scissors.
-    //  THEN return the valid user input
-
-    let userInput = prompt("What is your choice? Pick one of the following: rock, paper or scissors.");
-    userInput = userInput.trim().toLowerCase();
-    if (userInput === "rock" || userInput === "paper" || userInput === "scissors") {
-        return userInput;
-    }
-
-    return;
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
@@ -45,15 +27,25 @@ function playRound(humanChoice = getHumanChoice(), computerChoice = getComputerC
     // Get user and computer choice
     // If user choice trumps computer choice, increment score of the winner and log winner announcement
 
+    if (humanScore === 5) {
+        displayResult("Human has won the game!");
+        humanScore = 0;
+        return;
+    } else if (computerScore === 5) {
+        displayResult("Computer wins the game!");
+        computerScore = 0;
+        return;
+    }
+
     const humanChoiceResult = getHumanChoiceResult(humanChoice, computerChoice);
     if (humanChoiceResult === 1) {
         humanScore++;
-        console.log("Humans wins!!");
+        displayResult("Humans wins!!");
     } else if (humanChoiceResult === -1) {
         computerScore++;
-        console.log("Computer wins!!");
+        displayResult("Computer wins!!");
     } else {
-        console.log("It is a tie!");
+        displayResult("It is a tie!");
     }
 
     return;
@@ -72,25 +64,6 @@ function getHumanChoiceResult(humanChoice, computerChoice) {
     return -1;
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        if (humanScore === 3 || computerScore === 3) {
-            break;
-        }
-        playRound();
-    }
-
-    if (humanScore === 3) {
-        console.log("Human has won the game!");
-    } else {
-        console.log("Computer wins the game!");
-    }
-}
-
-
-
-
-
 const btnRock = document.querySelector("#btn-rock");
 const btnPaper = document.querySelector("#btn-paper");
 const btnScissors = document.querySelector("#btn-scissors");
@@ -106,3 +79,12 @@ btnPaper.addEventListener("click", () => {
 btnScissors.addEventListener("click", () => {
     playRound("scissors");
 });
+
+
+function displayResult(result) {
+    const resultsDiv = document.querySelector(".results");
+    const newParagraph = document.createElement("p");
+    newParagraph.style.margin = 0;
+    newParagraph.textContent = result;
+    resultsDiv.appendChild(newParagraph);
+}
